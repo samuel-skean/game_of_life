@@ -3,16 +3,18 @@ use std::{thread::sleep, time::Duration};
 use rand::{thread_rng, Rng};
 
 // Fails when WIDTH or HEIGHT are bigger than ISIZE_MAX.
-const WIDTH: usize = 15;
-const HEIGHT: usize = 10;
+const WIDTH: usize = 5;
+const HEIGHT: usize = 5;
 type GridType = [[bool; WIDTH + 2]; HEIGHT + 2];
 const BLANK_GRID: GridType = [[false; WIDTH + 2]; HEIGHT + 2];
 const GENERATIONS: u64 = 50;
 
 fn main() {
     let mut world_a = BLANK_GRID;
-    for row in &mut world_a {
-        thread_rng().fill(&mut row[..]);
+    let one_before_bottom_edge = world_a.len() - 1;
+    for row in &mut world_a[1..one_before_bottom_edge] {
+        let one_before_bottom_edge = row.len() - 1;
+        thread_rng().fill(&mut row[1..one_before_bottom_edge]);
     }
     
     let mut world_b = BLANK_GRID;
