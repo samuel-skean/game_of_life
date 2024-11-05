@@ -3,8 +3,8 @@ use std::{thread::sleep, time::Duration};
 use rand::{thread_rng, Rng};
 
 // Fails when WIDTH or HEIGHT are bigger than ISIZE_MAX.
-const WIDTH: usize = 5;
-const HEIGHT: usize = 5;
+const WIDTH: usize = 100;
+const HEIGHT: usize = 100;
 type GridType = [[bool; WIDTH + 2]; HEIGHT + 2];
 const BLANK_GRID: GridType = [[false; WIDTH + 2]; HEIGHT + 2];
 const GENERATIONS: u64 = 50;
@@ -12,6 +12,10 @@ const GENERATIONS: u64 = 50;
 fn main() {
     let mut world_a = BLANK_GRID;
     let one_before_bottom_edge = world_a.len() - 1;
+    // NOTE: If I remember correctly, the aliasing/liveness rules seemed like Rust
+    // re-evaluated the expression after the `in`, at least in this case, with
+    // slices. Maybe the slice itself implements the iterator trait? Does that
+    // make for nicer semantics?
     for row in &mut world_a[1..one_before_bottom_edge] {
         let one_before_bottom_edge = row.len() - 1;
         thread_rng().fill(&mut row[1..one_before_bottom_edge]);
