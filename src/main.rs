@@ -3,8 +3,8 @@ use std::{thread::sleep, time::Duration};
 use rand::{thread_rng, Rng};
 
 // Fails when WIDTH or HEIGHT are bigger than ISIZE_MAX.
-const WIDTH: usize = 100;
-const HEIGHT: usize = 100;
+const WIDTH: usize = 20;
+const HEIGHT: usize = 15;
 type GridType = [[bool; WIDTH + 2]; HEIGHT + 2];
 const BLANK_GRID: GridType = [[false; WIDTH + 2]; HEIGHT + 2];
 const GENERATIONS: u64 = 50;
